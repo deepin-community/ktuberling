@@ -1,0 +1,349 @@
+<chapter id="technical-reference">
+<chapterinfo>
+
+<authorgroup>
+<author
+><firstname
+>Eric</firstname
+> <surname
+>Bischoff</surname
+> </author>
+<othercredit role="translator"
+><firstname
+>Кирилл</firstname
+><surname
+>Бирюков</surname
+><affiliation
+><address
+><email
+>birk@rdi-kvant.ru</email
+></address
+></affiliation
+><contrib
+>Перевод на русский</contrib
+></othercredit
+> 
+</authorgroup>
+<date
+>2002-04-10</date
+> <releaseinfo
+>0.03.02</releaseinfo
+> <keywordset>
+<keyword
+>KDE</keyword>
+<keyword
+>KTuberling</keyword>
+<keyword
+>техническое описание</keyword>
+</keywordset>
+</chapterinfo>
+
+<title
+>Техническое описание</title>
+
+<para
+>&ktuberling; является прекрасным примером программирования под &kde;. Он имеет легко настраиваемую и изменяемую структуру. Например, для добавления или изменения рисунков игрового поля не потребуется написать ни строчки кода. Достаточно просто добавить или изменить существующий графический файл. Можно также перевести звуковые файлы игры, и Клубень заговорит на вашем родном языке! </para>
+
+<para
+>Если вы внесли какие-либо изменения или дополнения в игру, вышлите их автору - <ulink url="mailto:e.bischoff@noos.fr"
+>Эрику Бишофу</ulink
+> и он включит их в следующие версии. </para>
+
+<sect1 id="for-artists">
+<title
+>Дизайнерам</title>
+
+<para
+>Существует возможность добавления новых игровых полей, а также изменения их размеров и форм. Для каждого игрового поля необходимо создать два графических файла: файл изображения поля и файл маски. В игре есть поддержка восьми игровых полей, из которых сейчас используется только три. </para>
+
+<para
+>На данный момент в &ktuberling; используются шесть графических файлов: <filename
+>potato-game.png</filename
+>, <filename
+>potato-mask.png</filename
+>, <filename
+>penguin-game.png</filename
+>, <filename
+>penguin-mask.png</filename
+>, <filename
+>aquarium-game.png</filename
+> и <filename
+>aquarium-mask.png</filename
+>. Стандартное расположение этих файлов - в каталоге <filename class="directory"
+>$KDEDIR/share/apps/ktuberling/pics/</filename
+>. </para>
+
+<para
+>Первый тип файлов, <filename
+>*-game.png</filename
+> содержит изображения игрового поля и объектов, выбираемых пользователем. Это та графика, которую вы видите в процессе игры. </para>
+
+<para
+>Второй тип изображений, <filename
+>*-mask.png</filename
+>, содержит только маски объектов. Маски используются для обозначения границ объектов и, в некоторых случаях, позволяют объекту быть прозрачным (как, например, очки). Желательно, хотя и не обязательно, размещать объекты на тех же местах в файле игрового поля, что и в файле маски. </para>
+
+<para
+>В том же каталоге находится файл <filename
+>layout.xml</filename
+> (<filename
+>$KDEDIR/share/apps/ktuberling/pics/layout.xml</filename
+>), который описывает используемые файлы, а также их связь с пунктами меню. Кроме того он описывает позиционные параметры игрового поля и объектов в файлах игрового поля и маски. В том же файле осуществляется присваивание объектам звуков и объединение объектов в группы. Наконец, в нем описаны языки как наборы переведенных звуков. Файл <filename
+>layout.xml</filename
+> является стандартным XML-файлом. Более подробно об этом файле см. <link linkend="layout-details"
+>ниже</link
+>). </para>
+
+<para
+>И в этом же каталоге находится файл с именем<filename
+>layout.i18n</filename
+> (<filename
+>$KDEDIR/share/apps/ktuberling/pics/layout.xml</filename
+>). Файл содержит строки из <filename
+>layout.xml</filename
+>, которые могут быть переведены: <itemizedlist>
+<listitem
+><para
+>Пункты меню, позволяющие выбирать игровое поле и язык</para
+></listitem>
+<listitem
+><para
+>Имена категорий объектов</para
+></listitem>
+</itemizedlist>
+</para>
+
+<para
+>В каталоге выше находится файл <filename
+>ktuberlingui.rc</filename
+> (<filename
+>$KDEDIR/share/apps/ktuberling/ktuberlingui.rc</filename
+>). В этом XML-файле описываются меню &ktuberling;. Он должен содержать один тег - <markup
+>&lt;действие&gt;</markup
+> на каждое игровое поле и язык. Символическое имя действия в этом файле должно быть идентично символическому имени действия в файле <filename
+>layout.xml</filename
+>. </para>
+
+</sect1>
+
+<sect1 id="for-translators">
+<title
+>Перевод</title>
+
+<para
+>Локализация игры может быть осуществлена не только с помощью обычного механизма перевода меню и сообщений программ &kde; (механизма <literal role="extension"
+>.po</literal
+>-файлов), но и переводом звуков игры. </para>
+
+<para
+>Звуковые файлы в формате wav (<literal role="extension"
+>.wav</literal
+>) с названиями объектов на языке переводчиков могут быть помещены в подкаталоге соответствующего языка в основном каталоге звуков. Имя звука затем следует соотнести с файлом в файле <filename
+>layout.xml</filename
+>. Например, если язык перевода - русский, то необходимо поместить звуковые (<literal role="extension"
+>.wav</literal
+>) файлы с названиями объектов в каталог <filename
+>$KDEDIR/share/apps/ktuberling/sounds/ru</filename
+>. Затем нужно соотнести звук <quote
+>hat</quote
+> с файлом <filename
+>ru/шляпа.wav</filename
+>. </para>
+
+<para
+>В будущем &ktuberling; будет использовать файлы OGG Vorbis rc3 для хранения звуков. В настоящий момент можно сконвертировать файлы WAV в формат OGG Vorbis rc3 следующей командой: <screen
+><prompt
+>$</prompt
+> <userinput
+>oggenc_rc3 -o <replaceable
+>sound.ogg</replaceable
+> <replaceable
+>sound.wav</replaceable
+></userinput
+>
+</screen>
+</para>
+
+<para
+>Сведения о локализации и переводе &kde; доступны на <ulink url=" http://i18n.kde.org/translation-howto/index.html"
+>The KDE Translation HOWTO</ulink
+>. </para>
+
+</sect1>
+
+<sect1 id="for-programmers">
+
+<title
+>Программистам</title>
+<para
+>Программисту не трудно расширить и дополнить функциональность &ktuberling;.</para>
+
+<sect2 id="classes">
+<title
+>Классы C++</title>
+
+<variablelist>
+<varlistentry>
+<term
+><classname
+>TopLevel</classname
+></term>
+<listitem>
+<para
+>Окно верхнего уровня и основные функции управления программой</para>
+</listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><classname
+>Игровое поле</classname
+></term>
+<listitem>
+<para
+>Описание одного из уровней игры</para
+> </listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><classname
+>ToDraw</classname
+></term>
+<listitem>
+<para
+>Описание одного из выводимых графических объектов</para
+> </listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><classname
+>Звуки</classname
+></term>
+<listitem>
+<para
+>Описание одного из языков и его звуков</para
+> </listitem>
+</varlistentry>
+
+<varlistentry>
+<term
+><classname
+>Действие</classname
+></term>
+<listitem>
+<para
+>Действие пользователя, связанное со стеком отмены/повтора.</para
+> </listitem>
+</varlistentry>
+</variablelist>
+
+</sect2>
+
+<sect2 id="files-structure">
+<title
+>Структура <literal role="extension"
+>.tuberling</literal
+>-файлов </title>
+
+<para
+><literal role="extension"
+>.tuberling</literal
+>-файл содержит всю необходимую для прорисовки монстрика информацию. Это простой текстовой файл и его можно редактировать любым текстовым редактором</para>
+
+<para
+>Первая строка содержит номер игрового поля.</para>
+
+<para
+>В остальных строках размещаются графические объекты в том порядке, в котором они должны быть нарисованы. В одной строке содержится один объект. Каждая строка состоит из 5 чисел: идентификатор объекта и координаты прямоугольника (левая, верхняя, правая и нижняя), в которых объект должен быть нарисован. Числа разделяются пробелами или символами табуляции.</para>
+
+</sect2>
+</sect1>
+
+<sect1 id="layout-details">
+<title
+>Структура файла <filename
+>layout.xml</filename
+>.</title>
+
+<para
+>Тег верхнего уровня является уникальным и называется <markup
+>&lt;ktuberling&gt;</markup
+>. В нем содержится несколько тэгов <markup
+>&lt;playground&gt;</markup
+> игровых полей, по одному на поле, и <markup
+>&lt;language&gt;</markup
+> по одному на язык. </para>
+
+<para
+>Тег <markup
+>&lt;playground&gt;</markup
+> имеет два атрибута: <markup
+>gameboard</markup
+> и <markup
+>masks</markup
+>. Эти атрибуты задают имена файлов, содержащих изображения: <markup
+>gameboard</markup
+>  - изображения игрового поля, <markup
+>masks</markup
+> - масок объектов. Тег <markup
+>&lt;playground&gt;</markup
+> содержит один тег <markup
+>&lt;menuitem&gt;</markup
+>, один тег <markup
+>&lt;editablearea&gt;</markup
+>, несколько тегов <markup
+>&lt;category&gt;</markup
+> и несколько тегов <markup
+>&lt;object&gt;</markup
+>. </para>
+
+<para
+>Тег <markup
+>&lt;menuitem&gt;</markup
+> описывает идентификатор-действие пункта меню, который позволяет выбрать положение области, в которую вы можете перемещать и бросать объекты, а также метку этого пункта меню. Этот идентификатор должен совпадать с идентификатором в файле <filename
+>ktuberlingui.rc</filename
+>. </para>
+
+<para
+>Тег <markup
+>&lt;editablearea&gt;</markup
+> описывает положение области, в которую вы можете перемещать объекты, и звук, ассоциированный с ней. </para>
+
+<para
+>Тег <markup
+>&lt;category&gt;</markup
+> описывает положение и метку текста, описывающего группу объектов. Например, им могут быть описаны положение и текст группы <quote
+>Шляпы</quote
+>. </para>
+
+<para
+>Тег <markup
+>&lt;object&gt;</markup
+> описывает положение объекта в файлах игрового поля и маски, а также файл звука, ассоциированного с ним. </para>
+
+<para
+>Тег <markup
+>&lt;playground&gt;</markup
+> имеет один атрибут: <markup
+>code</markup
+>. Этот атрибут задает код локали языка. Тег <markup
+>&lt;language&gt;</markup
+> также содержит один тег <markup
+>&lt;menuitem&gt;</markup
+> и несколько тегов <markup
+>&lt;sound&gt;</markup
+>. </para>
+
+<para
+>Здесь не описываются теги более низкого уровня, так как их названия говорят сами за себя (людям, знающим английский язык :-) прим. пер.). Если вы изменяете файл <filename
+>layout.xml</filename
+>, то не забывайте также соответственно изменять и файлы <filename
+> layout.i18n</filename
+> и <filename
+>ktuberlingui.rc</filename
+>. </para>
+
+</sect1>
+</chapter>

@@ -1,0 +1,63 @@
+Source: ktuberling
+Section: games
+Priority: optional
+Maintainer: Debian Qt/KDE Maintainers <debian-qt-kde@lists.debian.org>
+Uploaders: Daniel Schepler <schepler@debian.org>,
+           Lisandro Damián Nicanor Pérez Meyer <lisandro@debian.org>,
+           Norbert Preining <norbert@preining.info>,
+           Sune Vuorela <sune@debian.org>,
+Build-Depends: cmake (>= 3.5.0~),
+               debhelper-compat (= 13),
+               extra-cmake-modules (>= 5.68.0~),
+               gettext,
+               libkf5completion-dev (>= 5.68.0~),
+               libkf5config-dev (>= 5.68.0~),
+               libkf5configwidgets-dev (>= 5.68.0~),
+               libkf5coreaddons-dev (>= 5.68.0~),
+               libkf5crash-dev (>= 5.68.0~),
+               libkf5dbusaddons-dev (>= 5.68.0~),
+               libkf5doctools-dev (>= 5.68.0~),
+               libkf5i18n-dev (>= 5.68.0~),
+               libkf5kdegames-dev (>= 4.9.0~),
+               libkf5kio-dev (>= 5.68.0~),
+               libkf5widgetsaddons-dev (>= 5.68.0~),
+               libkf5xmlgui-dev (>= 5.68.0~),
+               libqt5svg5-dev (>= 5.12.0~),
+               pkg-kde-tools (>= 0.14),
+               qtbase5-dev (>= 5.12.0~),
+               qtmultimedia5-dev (>= 5.12.0~),
+Standards-Version: 4.5.1
+Rules-Requires-Root: no
+Homepage: http://games.kde.org/
+Vcs-Browser: https://salsa.debian.org/qt-kde-team/kde/ktuberling
+Vcs-Git: https://salsa.debian.org/qt-kde-team/kde/ktuberling.git
+
+Package: ktuberling
+Architecture: any
+Depends: ktuberling-data (>= ${source:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends},
+Recommends: khelpcenter
+Description: stamp drawing toy
+ KTuberling is a drawing toy for small children with several activites.
+ .
+  * Give the potato a funny face, clothes, and other goodies
+  * Build a small town, complete with school, zoo, and fire department
+  * Create a fantastic moonscape with spaceships and aliens
+ .
+ KTuberling can speak the name of each the object in several languages,
+ to assist in learning basic vocabulary.
+ .
+ This package is part of the KDE games module.
+
+Package: ktuberling-data
+Architecture: all
+Depends: ${misc:Depends}
+Breaks: ktuberling (<< 4:20.08.3~), ${kde-l10n:all}
+Replaces: ktuberling (<< 4:20.08.3~), ${kde-l10n:all}
+Description: stamp drawing toy - data files
+ KTuberling is a drawing toy for small children with several activites.
+ .
+ This package contains the data files for KTuberling.
+ .
+ This package is part of the KDE games module.
